@@ -1,11 +1,17 @@
-import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import React from "react";
+import {
+  Jumbotron,
+  Container,
+  CardColumns,
+  Card,
+  Button
+} from "react-bootstrap";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
-import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import Auth from "../utils/auth";
+import { removeBookId } from "../utils/localStorage";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -25,7 +31,6 @@ const SavedBooks = () => {
       const response = await removeBook({
         variables: { bookId }
       });
-
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
@@ -41,7 +46,7 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
+  console.log(userData.savedBooks);
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
